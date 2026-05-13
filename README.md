@@ -24,7 +24,9 @@ The initial commit contains:
 - the final PDF of the thesis report
 - all the source code in its original form, without modifications or improvements.
 - trained network models
-
+The original code is under the folder "Simulation".
 -o-
 
 As the original code was written in a commercial not free software of Matlab, I intend to take help from coding agents to convert it to either python or julia code and replace Matlab Neural Network Toolbox with scikit-learn.
+
+The original code is now initially converted to python by Claude Sonnet 4.6. The converted code base is under the folder "Simulation_Python".
