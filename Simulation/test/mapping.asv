@@ -1,0 +1,105 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Mapping Strategies
+%
+% For the three end points of the bhand, we have to deliver 3 points 
+% from the current human hand configuration. However, for successful 
+% matching of the points from the hhand onto possible bhand configurations, 
+% the proper choice of the human hand origin is vital.
+% 
+% The three points of the bhand constitute a triangle. The five fingertips 
+% of hhand constitute a pentagon. The needed mapping should not only sort 
+% out suiting three points from the pentagon circumference, but also be 
+% able to deliver the desired center of gravity of the pentagon. It can be 
+% used as a point of reference for the bhand triangle shift in xy plane 
+% and/or orientation. The need arises because, the hhand thumb is not placed 
+% on the symmetry axis of the digit fingers as is the case in bhand.
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% At the first step, the pentagon should be to reduced to a triangle with 
+% one of the following strategies:
+% 
+% 1) using the index, ring and thumb fingertips only, 
+%        drawback: the palmar center is to be replaced; for instance with 
+%                  the triangle center
+% 
+% 2) using the middle, little and thumb fingertips only, 
+%        drawback: little finger is very weak; therefore that edge of the 
+%                  triangle will be not be very stationary
+% 
+% 3) using the index, little and thumb fingertips only, 
+%           this can be more stationary as compared to (2), because the 
+%           index is stronger than the middle finger
+% 
+% 4) building a mean from index-middle and ring-little pairs and taking 
+% thumb tip as the third point
+%           drawback: mean value can follow large jumps because of the 
+%                     independent flexion movement of the paired fingers
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% In all of the above, the corresponding tip trajectories should also be
+% considered. Because, successive triangles from the hhand deliver also 
+% the trajectories for the individual bhand fingertips and the members of 
+% these two group should be similar as far as possible.
+% 
+% For the fingertip trajectorial similarity, the following constraints can be set:
+% 
+% 1) The bhand nonspread finger flexion occurs in the symmetry plane of the 
+% two spread fingers. Therefore, the desired nonspread trajectory from hhand 
+% should better lay in the symmetry plane of the two other points. 
+% 
+% The best matching pentagon-to-triangle strategy for this constraint is (3).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Start the mapping only after the memory elements are full. The system
+% saves only one time the past of finger tips. Together with the current 
+% points, the loop must have been run at least twice to fill the memory.
+% "angle_index" is the iteration index of the control loop, so it gives the
+% number of control loop operations.
+%
+% See "human_control.m". 
+if(angle_index >= 2) 
+	
+	% To set the strategy to use, change "initials_for robotics.m".
+	switch triangle_strategy
+        
+        case strategy1          % use index, ring, thumb tips
+        
+            % Derive three points a,b,c on the digits' symmetry plane:
+            a = (hhand_q2cart.thumb_tip + hhand_q2cart.thumb_tip_past)/ 2;
+            b = (hhand_q2cart.index_tip + hhand_q2cart.index_tip_past)/ 2;
+            c = (a + b)/ 2;
+            % Plane equation: 
+            % normal_vector: n=(A,B,C)=(a-c)X(b-c);
+            %
+            % A(x - c_x) + B(y - c_y) + C(z - c_z) = 0
+            
+            
+        case strategy2          % use middle, little, thumb tips
+        
+            a = hhand_q2cart.thumb_tip;
+            b = hhand_q2cart.middle_tip;
+            c = hhand_q2cart.little_tip;
+            
+            
+        case strategy3          % use index, little, thumb tips
+        
+            a = hhand_q2cart.thumb_tip;
+            b = hhand_q2cart.index_tip;
+            c = hhand_q2cart.little_tip;
+            
+            
+        case strategy4          % use index, ring, thumb tips
+        
+            a = hhand_q2cart.thumb_tip;
+            b = hhand_q2cart.index_tip;
+            c = hhand_q2cart.middle_tip;        
+            d = hhand_q2cart.ring_tip; 
+            e = hhand_q2cart.little_tip;        
+            
+            a_mean = (a + b)/ 2;
+            b_mean = (c + d)/ 2;        
+            
+	end % end the switch
+end     % end if(angle_index > 2)
