@@ -10,7 +10,7 @@ Provides:
 """
 
 import numpy as np
-from barrett_hand import BarrettHand, CONTROL_MODE, CLOSE_SIM_MODE
+from Simulation_Python.barrett_hand import BarrettHand, CONTROL_MODE, CLOSE_SIM_MODE
 
 
 # ─────────────────────────────────────────────────────────────────────────────

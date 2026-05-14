@@ -7,7 +7,7 @@ Port of mapper_5_to_3.m
 """
 
 import numpy as np
-from transforms import trans, X_AXIS, Y_AXIS, Z_AXIS
+from Simulation_Python.transforms import trans, X_AXIS, Y_AXIS, Z_AXIS
 
 
 CORNER_COORDINATES       = 2

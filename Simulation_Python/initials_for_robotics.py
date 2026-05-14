@@ -13,13 +13,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D  # noqa: F401
 
-from transforms import X_AXIS, Y_AXIS, Z_AXIS
-from human_hand   import HumanHand
-from barrett_hand import BarrettHand, CONTROL_MODE, CLOSE_SIM_MODE
-from hhand_control import (hhand_control_step,
+from Simulation_Python.transforms import X_AXIS, Y_AXIS, Z_AXIS
+from Simulation_Python.human_hand   import HumanHand
+from Simulation_Python.barrett_hand import BarrettHand, CONTROL_MODE, CLOSE_SIM_MODE
+from Simulation_Python.hhand_control import (hhand_control_step,
                             SYNERGIC_CLOSE, SINGLE_INDEX_CLOSE)
-from bhand_control import bhand_control_step, angle2encoder
-from mapper_5_to_3 import mapper_5_to_3, CORNER_COORDINATES
+from Simulation_Python.bhand_control import bhand_control_step, angle2encoder
+from Simulation_Python.mapper_5_to_3 import mapper_5_to_3, CORNER_COORDINATES
 
 
 # ── Demo mode switches (set exactly one to True) ──────────────────────────────
@@ -238,8 +238,8 @@ def run_teleopera_mode(mapper_cfg=None, save_avi=False):
             },
         }
 
-    from transforms import rotate as rot, trans as T_mat
-    from barrett_hand import BarrettHand
+    from Simulation_Python.transforms import rotate as rot, trans as T_mat
+    from Simulation_Python.barrett_hand import BarrettHand
 
     hhand = HumanHand(LENGTH_RESOLUTION, WITH_MEMORY)
     bhand = BarrettHand(CONTROL_MODE, mapper_cfg['barrett'],
@@ -251,7 +251,7 @@ def run_teleopera_mode(mapper_cfg=None, save_avi=False):
 
     # Build barrett alignment matrix
     def _make_alignment(bc):
-        from transforms import rotate as R, trans as T
+        from Simulation_Python.transforms import rotate as R, trans as T
         A = (R(3, bc['rotate_z']) @ R(2, bc['rotate_y']) @ R(1, bc['rotate_x'])
              @ T(bc['trans_x'], bc['trans_y'], bc['trans_z']))
         scaling = bc['scaler'] * np.eye(4); scaling[3, 3] = 1.0
