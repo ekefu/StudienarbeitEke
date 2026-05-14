@@ -12,7 +12,7 @@ import os
 import numpy as np
 import joblib
 
-from Simulation_Python.transforms import trans, rotate, X_AXIS, Y_AXIS, Z_AXIS
+from transforms import trans, rotate, X_AXIS, Y_AXIS, Z_AXIS
 
 # ── Mode constants (must match initials.py) ──────────────────────────────────
 CONTROL_MODE   = 1

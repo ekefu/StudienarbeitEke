@@ -9,7 +9,7 @@ Human Hand model ported from:
 """
 
 import numpy as np
-from Simulation_Python.transforms import rotate, trans, hom2vect, X_AXIS, Y_AXIS, Z_AXIS
+from transforms import rotate, trans, hom2vect, X_AXIS, Y_AXIS, Z_AXIS
 
 
 class Finger:

@@ -11,7 +11,7 @@ Usage
 """
 
 import numpy as np
-from Simulation_Python.human_hand import HumanHand
+from human_hand import HumanHand
 
 # Mode constants
 SYNERGIC_CLOSE     = 1
