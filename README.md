@@ -24,9 +24,19 @@ The initial commit contains:
 - the final PDF of the thesis report
 - all the source code in its original form, without modifications or improvements.
 - trained network models
+  
 The original code is under the folder "Simulation".
 ---
 
 As the original code was written in a commercial not free software of Matlab, I intend to take help from coding agents to convert it to either python or julia code and replace Matlab Neural Network Toolbox with scikit-learn.
 
-The original code is now initially converted to python by Claude Sonnet 4.6. The converted code base is under the folder "Simulation_Python".
+The original code is now converted to python by Claude Sonnet 4.6. The converted code base is under the folder "Simulation_Python".
+To run it under Linux, change to the Simulation_Python folder, initiate a virtual environment, install python libs in the virtual environment that are needed for the simulation and run the launcher script with the following commands:
+
+```
+cd Simulation_Python
+/usr/bin/python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python initials_for_robotics.py
+```
